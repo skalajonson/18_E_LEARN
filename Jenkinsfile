@@ -4,6 +4,7 @@ properties([disableConcurrentBuilds()])
 
 pipeline  {
         agent { 
+           label 'master'
         }
 
     options {
