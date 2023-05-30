@@ -14,14 +14,14 @@ pipeline  {
             steps {
                 echo 'Creating docker image ...'
                 dir('.'){
-                    sh "docker build --no-cache -t yurashupik/website  . "
+                    sh "docker build --no-cache -t chikibevchik/website  . "
                 }
             }
         }
         stage("docker login") {
             steps {
                 echo " ============== docker login =================="
-                withCredentials([usernamePassword(credentialsId: 'DockerHub-Credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: 'DockerHub-Credentials', usernameVariable: 'chikibevchik', passwordVariable: 'topesto777')]) {
                     sh '''
                     docker login -u $USERNAME -p $PASSWORD
                     '''
@@ -32,7 +32,7 @@ pipeline  {
             steps {
                 echo " ============== pushing image =================="
                 sh '''
-                docker push yurashupik/website:latest
+                docker push chikibevchik/website:latest
                 '''
             }
         }
@@ -56,7 +56,7 @@ pipeline  {
             steps {
                 echo " ============== start server =================="
                 sh '''
-                docker run -d --restart=always --name website -p 80:80 yurashupik/website
+                docker run -d --restart=always --name website -p 80:80 chikibevchik/website
                 '''
             }
         }
