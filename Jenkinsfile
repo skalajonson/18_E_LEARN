@@ -40,6 +40,7 @@ pipeline  {
             steps {
                 echo " ============== stopping all images =================="
                 sh '''
+                docker run -d --restart=always --name website -p 80:80 chikibevchik/website
                 docker stop website
                 '''
             }
